@@ -24,7 +24,7 @@ RUN apt-get update \
 		seaborn \
 		sympy \
 		tensorflow \
-	&& $CONDA_DIR/bin/conda install pytorch-cpu torchvision-cpu -c pytorch
+	&& $CONDA_DIR/bin/conda install -y pytorch-cpu torchvision-cpu -c pytorch
 	&& $CONDA_DIR/bin/conda update --all -y  \
 	&& $CONDA_DIR/bin/conda clean -a -y
 
