@@ -4,7 +4,7 @@ ENV CONDA_DIR=/condinst
 
 RUN apt-get update \
 	&& apt-get -y dist-upgrade \
-	&& apt-get install -y wget keychain libsm6 libxext6 libxrender1 \
+	&& apt-get install -y wget git keychain libsm6 libxext6 libxrender1 \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh \
