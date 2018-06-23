@@ -33,7 +33,7 @@ RUN apt-get update \
 	&& $CONDA_DIR/bin/conda clean -a -y \
 	&& $CONDA_DIR/bin/pip install --no-cache-dir sklearn-pandas isoweek pandas_summary torchtext
 
-COPY *.py /root/.ipython/profile_default/startup
+COPY *.py /root/.ipython/profile_default/startup/
 
 WORKDIR /work
 
