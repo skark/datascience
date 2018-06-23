@@ -26,11 +26,14 @@ RUN apt-get update \
 		tensorflow \
 		bcolz \
 		spacy \
+		ipywidgets \
 	&& $CONDA_DIR/bin/conda install -y pytorch-cpu torchvision-cpu -c pytorch \
 	&& $CONDA_DIR/bin/conda install -y feather-format -c conda-forge \
 	&& $CONDA_DIR/bin/conda update --all -y  \
 	&& $CONDA_DIR/bin/conda clean -a -y \
 	&& $CONDA_DIR/bin/pip install --no-cache-dir sklearn-pandas isoweek pandas_summary torchtext
+
+COPY *.py /root/.ipython/profile_default/startup
 
 WORKDIR /work
 
