@@ -10,7 +10,6 @@ RUN apt-get update \
 	&& wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh \
 	&& /bin/bash Miniconda3-latest-Linux-x86_64.sh -f -b -p $CONDA_DIR \
 	&& rm Miniconda3-latest-Linux-x86_64.sh \
-	&& $CONDA_DIR/bin/conda update -y python \
 	&& $CONDA_DIR/bin/conda install -y  \
 		keras \
 		matplotlib \
