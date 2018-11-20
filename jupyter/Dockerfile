@@ -22,7 +22,7 @@ RUN apt-get update \
 		scipy \
 		seaborn \
 		sympy \
-		tensorflow \
+		tensorflow-mkl \
 		bcolz \
 		spacy \
 		ipywidgets \
