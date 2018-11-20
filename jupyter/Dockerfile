@@ -28,9 +28,11 @@ RUN apt-get update \
 		ipywidgets \
 	&& $CONDA_DIR/bin/conda install -y pytorch-cpu torchvision-cpu -c pytorch \
 	&& $CONDA_DIR/bin/conda install -y feather-format -c conda-forge \
-	&& $CONDA_DIR/bin/conda update --all -y  \
 	&& $CONDA_DIR/bin/conda clean -a -y \
 	&& $CONDA_DIR/bin/pip install --no-cache-dir sklearn-pandas isoweek pandas_summary torchtext
+	
+#	&& $CONDA_DIR/bin/conda update -y python \	
+#	&& $CONDA_DIR/bin/conda update --all -y  \	
 
 COPY *.py /root/.ipython/profile_default/startup/
 
