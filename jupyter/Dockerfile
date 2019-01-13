@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:latest as build
 
 ENV CONDA_DIR=/condinst
 
@@ -35,6 +35,9 @@ RUN apt-get update \
 #	&& $CONDA_DIR/bin/conda update --all -y  \	
 
 COPY *.py /root/.ipython/profile_default/startup/
+
+FROM scratch
+COPY --from=build / /
 
 WORKDIR /work
 
