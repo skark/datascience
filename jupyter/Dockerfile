@@ -30,7 +30,7 @@ RUN apt-get update \
 	&& $CONDA_DIR/bin/conda install -y feather-format -c conda-forge \
 	&& $CONDA_DIR/bin/conda update -y python \
 	&& $CONDA_DIR/bin/conda clean -a -y \
-	&& $CONDA_DIR/bin/pip install --no-cache-dir sklearn-pandas isoweek pandas_summary torchtext
+	&& $CONDA_DIR/bin/pip install --no-cache-dir sklearn-pandas isoweek pandas_summary torchtext \
 	&& date >/build-date.txt
 	
 #	&& $CONDA_DIR/bin/conda update --all -y  \	
