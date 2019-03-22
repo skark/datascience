@@ -2,7 +2,8 @@ FROM ubuntu:latest as build
 
 ENV CONDA_DIR=/condinst
 
-RUN apt-get update \
+RUN set -o xtrace \ 
+        && apt-get update \
 	&& apt-get -y dist-upgrade \
 	&& DEBIAN_FRONTEND=noninteractive apt-get install -y git wget keychain libsm6 libxext6 libxrender1 dvipng texlive-latex-extra texlive-fonts-recommended \
 	&& apt-get clean \
@@ -31,7 +32,8 @@ RUN apt-get update \
 	&& $CONDA_DIR/bin/conda update -y python \
 	&& $CONDA_DIR/bin/conda clean -a -y \
 	&& $CONDA_DIR/bin/pip install --no-cache-dir sklearn-pandas isoweek pandas_summary torchtext \
-	&& date >/build-date.txt
+	&& date >/build-date.txt \
+	&& set +o xtrace
 	
 #	&& $CONDA_DIR/bin/conda update --all -y  \	
 
