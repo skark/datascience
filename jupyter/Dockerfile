@@ -3,7 +3,7 @@ FROM ubuntu:latest as build
 ENV CONDA_DIR=/condinst
 
 RUN set -o xtrace \ 
-        && apt-get update \
+	&& apt-get update \
 	&& apt-get -y dist-upgrade \
 	&& DEBIAN_FRONTEND=noninteractive apt-get install -y git wget keychain libsm6 libxext6 libxrender1 dvipng texlive-latex-extra texlive-fonts-recommended \
 	&& apt-get clean \
@@ -40,9 +40,8 @@ RUN set -o xtrace \
 COPY startup/*.py /root/.ipython/profile_default/startup/
 
 FROM build
-COPY unittest.py /work/
-RUN ls /work/
-RUN $CONDA_DIR/bin/python /work/unittest.py
+COPY unittest.py /work/tx.py
+RUN $CONDA_DIR/bin/python /work/tx.py
 
 #FROM scratch
 #COPY --from=build / /
