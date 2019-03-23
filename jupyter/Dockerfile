@@ -41,7 +41,8 @@ COPY startup/*.py /root/.ipython/profile_default/startup/
 
 FROM build
 COPY unittest.py /work/
-RUN $CONDA_DIR/bin/python /work/unittest.py
+RUN $CONDA_DIR/bin/python /work/unittest.py \
+	&& ls /work/
 
 #FROM scratch
 #COPY --from=build / /
