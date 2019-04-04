@@ -36,7 +36,7 @@ RUN set -o xtrace \
 	&& fallocate -l 10G /swapfile \
 	&& chmod 600 /swapfile \
 	&& mkswap /swapfile \
-	&& swapon /swapfile \	
+	&& echo "/swapfile swap swap auto 0 0" | tee -a /etc/fstab \	
 	&& set +o xtrace
 	
 #	&& $CONDA_DIR/bin/conda update --all -y  \	
