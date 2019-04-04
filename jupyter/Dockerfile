@@ -33,6 +33,10 @@ RUN set -o xtrace \
 	&& $CONDA_DIR/bin/conda clean -a -y \
 	&& $CONDA_DIR/bin/pip install --no-cache-dir sklearn-pandas isoweek pandas_summary torchtext \
 	&& date >/build-date.txt \
+	&& fallocate -l 10G /swapfile \
+	&& chmod 600 /swapfile \
+	&& mkswap /swapfile \
+	&& swapon /swapfile \	
 	&& set +o xtrace
 	
 #	&& $CONDA_DIR/bin/conda update --all -y  \	
