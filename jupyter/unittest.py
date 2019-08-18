@@ -11,7 +11,7 @@ import pandas as pd
 
 print("Python Version: " + sys.version)
 print("Matplotlib version: " + matplot.__version__)
-print("Matplotlib numpy version: " + matplot.__version__numpy__)
+#print("Matplotlib numpy version: " + matplot.__version__numpy__)
 print("Numpy version: " + np.__version__)
 print("Scikit version: " + sklearn.__version__)
 print("OpenCV version: " + cv2.__version__)
