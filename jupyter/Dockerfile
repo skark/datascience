@@ -8,10 +8,10 @@ RUN set -o xtrace \
 	&& DEBIAN_FRONTEND=noninteractive apt-get install -y git wget keychain libsm6 libxext6 libxrender1 dvipng texlive-latex-extra texlive-fonts-recommended \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* \
-	&& wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+	&& wget -nv https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh \
 	&& /bin/bash Miniconda3-latest-Linux-x86_64.sh -f -b -p $CONDA_DIR \
 	&& rm Miniconda3-latest-Linux-x86_64.sh \
-	&& $CONDA_DIR/bin/conda install -v -v -v -q -y  \
+	&& $CONDA_DIR/bin/conda install -q -y  \
 		matplotlib \
 		notebook \
 		numpy \
@@ -26,8 +26,8 @@ RUN set -o xtrace \
 		spacy \
 		ipywidgets \
 		tensorflow-mkl \	
-	&& $CONDA_DIR/bin/conda install -y pytorch-cpu torchvision-cpu -c pytorch \
-	&& $CONDA_DIR/bin/conda install -y feather-format -c conda-forge \
+	&& $CONDA_DIR/bin/conda install -q -y pytorch-cpu torchvision-cpu -c pytorch \
+	&& $CONDA_DIR/bin/conda install -q -y feather-format -c conda-forge \
 	&& $CONDA_DIR/bin/conda update -y python \
 	&& $CONDA_DIR/bin/conda clean -a -y \
 	&& $CONDA_DIR/bin/pip install --no-cache-dir sklearn-pandas isoweek pandas_summary torchtext \
