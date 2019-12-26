@@ -12,7 +12,6 @@ RUN set -o xtrace \
 	&& /bin/bash Miniconda3-latest-Linux-x86_64.sh -f -b -p $CONDA_DIR \
 	&& rm Miniconda3-latest-Linux-x86_64.sh \
 	&& $CONDA_DIR/bin/conda install -y  \
-		keras \
 		matplotlib \
 		notebook \
 		numpy \
