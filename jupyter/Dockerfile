@@ -11,6 +11,7 @@ RUN set -o xtrace \
 	&& wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh \
 	&& /bin/bash Miniconda3-latest-Linux-x86_64.sh -f -b -p $CONDA_DIR \
 	&& rm Miniconda3-latest-Linux-x86_64.sh \
+	&& $CONDA_DIR/bin/conda install -y -c anaconda tensorflow-mkl \
 	&& $CONDA_DIR/bin/conda install -y  \
 		matplotlib \
 		notebook \
@@ -22,7 +23,6 @@ RUN set -o xtrace \
 		scipy \
 		seaborn \
 		sympy \
-		tensorflow-mkl \
 		bcolz \
 		spacy \
 		ipywidgets \
