@@ -11,7 +11,6 @@ RUN set -o xtrace \
 	&& wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh \
 	&& /bin/bash Miniconda3-latest-Linux-x86_64.sh -f -b -p $CONDA_DIR \
 	&& rm Miniconda3-latest-Linux-x86_64.sh \
-	&& $CONDA_DIR/bin/conda install -y -c anaconda tensorflow-mkl \
 	&& $CONDA_DIR/bin/conda install -y  \
 		matplotlib \
 		notebook \
@@ -26,6 +25,7 @@ RUN set -o xtrace \
 		bcolz \
 		spacy \
 		ipywidgets \
+	&& $CONDA_DIR/bin/conda install -y tensorflow-mkl \	
 	&& $CONDA_DIR/bin/conda install -y pytorch-cpu torchvision-cpu -c pytorch \
 	&& $CONDA_DIR/bin/conda install -y feather-format -c conda-forge \
 	&& $CONDA_DIR/bin/conda update -y python \
