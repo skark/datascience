@@ -12,21 +12,17 @@ RUN set -o xtrace \
 	&& /bin/bash Miniconda3-latest-Linux-x86_64.sh -f -b -p $CONDA_DIR \
 	&& rm Miniconda3-latest-Linux-x86_64.sh \
 	&& $CONDA_DIR/bin/conda install -q -y  \
-		matplotlib \
 		notebook \
 		numpy \
 		pandas \
-		scikit-image \
 		scikit-learn \
-		scipy \
 		seaborn \
 		sympy \
 		bcolz \
-		spacy \
 		ipywidgets \
 		tensorflow-mkl">=2.0.0" \	
 	&& $CONDA_DIR/bin/conda install -q -y pytorch-cpu torchvision-cpu -c pytorch \
-	&& $CONDA_DIR/bin/conda install -q -y feather-format opencv -c conda-forge \
+	&& $CONDA_DIR/bin/conda install -q -y feather-format opencv scipy matplotlib scikit-image spacy -c conda-forge \
 	&& $CONDA_DIR/bin/conda update -y python \
 	&& $CONDA_DIR/bin/conda clean -a -y \
 	&& $CONDA_DIR/bin/pip install --no-cache-dir sklearn-pandas isoweek pandas_summary torchtext \
