@@ -1,4 +1,8 @@
-FROM ubuntu:latest as build
+#Base Image
+FROM ubuntu:latest as base
+
+#Build the image
+FROM base as build
 
 ENV CONDA_DIR=/condinst
 
@@ -33,11 +37,8 @@ RUN set -o xtrace \
 
 COPY startup/*.py /root/.ipython/profile_default/startup/
 
-#Base Image
-FROM ubuntu:latest as base
-
 #Find all the updates
-FROM ubuntu:latest as buildupdates
+FROM base as buildupdates
 COPY --from=build / /build
 COPY --from=base / /base
 RUN set -o xtrace \
@@ -51,15 +52,15 @@ RUN set -o xtrace \
 #COPY --from=build / /
 
 #Create final image
-FROM ubuntu:latest as final
+FROM base as final
 COPY --from=buildupdates /buildupdates /
 WORKDIR /work
+EXPOSE 8888
+ENTRYPOINT ["/condinst/bin/jupyter", "notebook", "--ip=0.0.0.0", "--allow-root", "--no-browser", "--NotebookApp.token=''"]
 
 #Run Unit test
 FROM final
 COPY unittest.py /work/tx.py
 RUN /condinst/bin/python /work/tx.py
-
+ 
 FROM final
-EXPOSE 8888
-ENTRYPOINT ["/condinst/bin/jupyter", "notebook", "--ip=0.0.0.0", "--allow-root", "--no-browser", "--NotebookApp.token=''"]
