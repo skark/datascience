@@ -13,13 +13,13 @@ print("Matplotlib version: " + matplot.__version__)
 #print("Matplotlib numpy version: " + matplot.__version__numpy__)
 
 print("Numpy version: " + np.__version__)
-numpy.show_config()
+np.show_config()
 
 print("Scikit version: " + sklearn.__version__)
 sklearn.show_versions()
 
 print("Tensorflow version: " + tf.__version__)
-print("Tensor Flow MKL Enabled: " + str(tensorflow.pywrap_tensorflow.IsMklEnabled()))
+print("Tensor Flow MKL Enabled: " + str(tf.pywrap_tensorflow.IsMklEnabled()))
 
 print("OpenCV version: " + cv2.__version__)
 print("Pytorch version:" + torch.__version__)
