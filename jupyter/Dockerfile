@@ -15,7 +15,6 @@ RUN set -o xtrace \
 		matplotlib \
 		notebook \
 		numpy \
-		opencv \
 		pandas \
 		scikit-image \
 		scikit-learn \
@@ -34,6 +33,7 @@ RUN set -o xtrace \
 	&& date >/build-date.txt \
 	&& set +o xtrace
 	
+#		opencv \	
 #	&& $CONDA_DIR/bin/conda update --all -y  \	
 
 COPY startup/*.py /root/.ipython/profile_default/startup/
