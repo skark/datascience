@@ -42,7 +42,7 @@ FROM base as buildupdates
 COPY --from=build / /build
 COPY --from=base / /base
 RUN set -o xtrace \
-	apt-get update \
+	&& apt-get update \
 	&& DEBIAN_FRONTEND=noninteractive apt-get install -y rsync \
 	&& rsync -rvc --compare-dest=../base/ /build/ /buildupdates/ \
 	&& set +o xtrace
