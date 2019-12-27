@@ -34,14 +34,14 @@ RUN set -o xtrace \
 
 COPY startup/*.py /root/.ipython/profile_default/startup/
 
-FROM scratch as final
-COPY --from=build / /
+#FROM scratch as final
+#COPY --from=build / /
 
-FROM final
+FROM build
 COPY unittest.py /work/tx.py
 RUN $CONDA_DIR/bin/python /work/tx.py
 
-FROM final
+FROM build
 WORKDIR /work
 EXPOSE 8888
 ENTRYPOINT ["/condinst/bin/jupyter", "notebook", "--ip=0.0.0.0", "--allow-root", "--no-browser", "--NotebookApp.token=''"]
