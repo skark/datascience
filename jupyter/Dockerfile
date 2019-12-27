@@ -1,8 +1,4 @@
-#Base Image
-FROM ubuntu:latest as base
-
-#Build the image
-FROM base as build
+FROM ubuntu:latest as build
 
 ENV CONDA_DIR=/condinst
 
@@ -32,35 +28,22 @@ RUN set -o xtrace \
 	&& $CONDA_DIR/bin/pip install --no-cache-dir sklearn-pandas isoweek pandas_summary torchtext \
 	&& date >/build-date.txt \
 	&& set +o xtrace
-		
+	
+#		opencv \	
 #	&& $CONDA_DIR/bin/conda update --all -y  \	
 
 COPY startup/*.py /root/.ipython/profile_default/startup/
 
-#Find all the updates
-FROM base as buildupdates
-COPY --from=build / /build
-COPY --from=base / /base
-RUN set -o xtrace \
-	&& apt-get update \
-	&& DEBIAN_FRONTEND=noninteractive apt-get install -y rsync \
-	&& rsync -rvc --compare-dest=../base/ /build/ /buildupdates/ \
-	&& set +o xtrace
+FROM build
+COPY unittest.py /work/tx.py
+RUN $CONDA_DIR/bin/python /work/tx.py
 
-#Alternative approach to sqash all layers
 #FROM scratch
 #COPY --from=build / /
 
-#Create final image
-FROM base as final
-COPY --from=buildupdates /buildupdates /
+FROM build
 WORKDIR /work
-EXPOSE 8888
-ENTRYPOINT ["/condinst/bin/jupyter", "notebook", "--ip=0.0.0.0", "--allow-root", "--no-browser", "--NotebookApp.token=''"]
 
-#Run Unit test
-FROM final
-COPY unittest.py /work/tx.py
-RUN /condinst/bin/python /work/tx.py
- 
-FROM final
+EXPOSE 8888
+
+ENTRYPOINT ["/condinst/bin/jupyter", "notebook", "--ip=0.0.0.0", "--allow-root", "--no-browser", "--NotebookApp.token=''"]
