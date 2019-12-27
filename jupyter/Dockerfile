@@ -38,10 +38,10 @@ FROM build
 COPY unittest.py /work/tx.py
 RUN $CONDA_DIR/bin/python /work/tx.py
 
-#FROM scratch
-#COPY --from=build / /
+FROM scratch
+COPY --from=build / /
 
-FROM build
+#FROM build
 WORKDIR /work
 
 EXPOSE 8888
