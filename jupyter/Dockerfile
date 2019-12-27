@@ -28,22 +28,38 @@ RUN set -o xtrace \
 	&& $CONDA_DIR/bin/pip install --no-cache-dir sklearn-pandas isoweek pandas_summary torchtext \
 	&& date >/build-date.txt \
 	&& set +o xtrace
-	
-#		opencv \	
+		
 #	&& $CONDA_DIR/bin/conda update --all -y  \	
 
 COPY startup/*.py /root/.ipython/profile_default/startup/
 
-FROM build
-COPY unittest.py /work/tx.py
-RUN $CONDA_DIR/bin/python /work/tx.py
+#Base Image
+FROM ubuntu:latest as base
 
-FROM scratch
-COPY --from=build / /
+#Find all the updates
+FROM ubuntu:latest as buildupdates
+COPY --from=build / /build
+COPY --from=base / /base
+RUN set -o xtrace \
+	apt-get update \
+	&& DEBIAN_FRONTEND=noninteractive apt-get install -y rsync
+	&& rsync -rvc --dry-run --compare-dest=../base/ /build/ /buildupdates/
+	&& set +o xtrace
 
-#FROM build
+#Alternative approach to sqash all layers
+#FROM scratch
+#COPY --from=build / /
+
+#Create final image
+FROM ubuntu:latest as final
+COPY --from=buildupdates /buildupdates /
 WORKDIR /work
 
-EXPOSE 8888
+#Run Unit test
+FROM final
+COPY unittest.py /work/tx.py
+RUN /condinst/bin/python /work/tx.py
 
+FROM final
+EXPOSE 8888
 ENTRYPOINT ["/condinst/bin/jupyter", "notebook", "--ip=0.0.0.0", "--allow-root", "--no-browser", "--NotebookApp.token=''"]
