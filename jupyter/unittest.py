@@ -19,8 +19,6 @@ print("Scikit version: " + sklearn.__version__)
 sklearn.show_versions()
 
 print("Tensorflow version: " + tf.__version__)
-print("Tensor Flow MKL Enabled: " + str(tf.pywrap_tensorflow.IsMklEnabled()))
-
 print("OpenCV version: " + cv2.__version__)
 print("Pytorch version:" + torch.__version__)
 print("Scipy version:" + scipy.version.full_version)
