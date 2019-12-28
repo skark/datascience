@@ -1,6 +1,6 @@
 FROM ubuntu:latest as build
 
-ENV CONDA_DIR=/condinst
+ENV CONDA_DIR=/condinst PYTHONDONTWRITEBYTECODE=1
 
 RUN set -o xtrace \ 
 	&& apt-get update \
