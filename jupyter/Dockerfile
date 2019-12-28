@@ -28,8 +28,7 @@ RUN set -o xtrace \
 	&& $CONDA_DIR/bin/pip install --no-cache-dir sklearn-pandas isoweek pandas_summary torchtext \
 	&& find . -type f -name "*.py[co]" -delete \
 	&& find . -type d -name "__pycache__" -delete \
-	&& du -ah $CONDA_DIR \
-	&& tree --du -h $CONDA_DIR \
+	&& tree --du -d -h $CONDA_DIR \
 	&& date >/build-date.txt \
 	&& set +o xtrace
 	
