@@ -1,8 +1,6 @@
 FROM ubuntu:latest as build
 
-ENV CONDA_DIR=/condinst \
-	PYTHONDONTWRITEBYTECODE=1 \
-	PYTHONUNBUFFERED=1
+ENV CONDA_DIR=/condinst
 
 RUN set -o xtrace \ 
 	&& apt-get update \
@@ -30,6 +28,7 @@ RUN set -o xtrace \
 	&& $CONDA_DIR/bin/pip install --no-cache-dir sklearn-pandas isoweek pandas_summary torchtext \
 	&& find . -type f -name "*.py[co]" -delete \
 	&& find . -type d -name "__pycache__" -delete \
+	&& du -ah $CONDA_DIR
 	&& date >/build-date.txt \
 	&& set +o xtrace
 	
