@@ -5,7 +5,7 @@ ENV CONDA_DIR=/condinst
 RUN set -o xtrace \ 
 	&& apt-get update \
 	&& apt-get -y dist-upgrade \
-	&& DEBIAN_FRONTEND=noninteractive apt-get install -y tree git wget keychain libsm6 libxext6 libxrender1 dvipng texlive-latex-extra texlive-fonts-recommended \
+	&& DEBIAN_FRONTEND=noninteractive apt-get install -y git wget keychain libsm6 libxext6 libxrender1 dvipng texlive-latex-extra texlive-fonts-recommended \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& wget -nv https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh \
@@ -28,7 +28,6 @@ RUN set -o xtrace \
 	&& $CONDA_DIR/bin/pip install --no-cache-dir sklearn-pandas isoweek pandas_summary torchtext \
 	&& find . -type f -name "*.py[co]" -delete \
 	&& find . -type d -name "__pycache__" -delete \
-	&& tree --du -d -h $CONDA_DIR \
 	&& date >/build-date.txt \
 	&& set +o xtrace
 	
