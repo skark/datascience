@@ -21,7 +21,7 @@ RUN set -o xtrace \
 		bcolz \
 		ipywidgets \
 		tensorflow-mkl">=2.0.0" \	
-	&& $CONDA_DIR/bin/conda install -q -y pytorch-cpu torchvision-cpu -c pytorch \
+	&& $CONDA_DIR/bin/conda install -q -y pytorch torchvision cpuonly -c pytorch \
 	&& $CONDA_DIR/bin/conda install -q -y feather-format opencv scipy matplotlib scikit-image spacy -c conda-forge \
 	&& $CONDA_DIR/bin/conda update -y python \
 	&& $CONDA_DIR/bin/conda clean -a -y \
