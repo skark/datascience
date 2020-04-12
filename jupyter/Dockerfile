@@ -47,4 +47,4 @@ RUN $CONDA_DIR/bin/python /work/tx.py
 FROM build
 WORKDIR /work
 EXPOSE 8888
-ENTRYPOINT ["/condinst/bin/jupyter", "notebook", "--ip=0.0.0.0", "--allow-root", "--no-browser", "--NotebookApp.token=''"]
+ENTRYPOINT ["/condinst/bin/jupyter", "notebook", "--ip=0.0.0.0", "--allow-root", "--no-browser", "--NotebookApp.allow_origin='*'" "--NotebookApp.token=''"]
