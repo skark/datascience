@@ -8,4 +8,4 @@ Sample command to run on linux:
 Sample command to run on Windows:  
 `docker run -it --rm --name datascience -p 8888:8888 -v C:\datascience:/work skark/datascience`
 
-Connect the running container using `http://localhost:8888/`
+Connect to the running container using `http://localhost:8888/`
