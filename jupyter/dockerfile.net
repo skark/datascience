@@ -20,9 +20,9 @@ RUN set -o xtrace \
         && find $CONDA_DIR -type f -name "*.js.map" -delete \
         && find $CONDA_DIR -path '*/__pycache__/*' -delete \
         && find $CONDA_DIR -type d -name "__pycache__" -delete \
-        && dotnet tool install --global dotnet-try \
+        && dotnet tool install -g --add-source "https://dotnet.myget.org/F/dotnet-try/api/v3/index.json" Microsoft.dotnet-interactive \
         && export PATH="$PATH:$CONDA_DIR/bin:/root/.dotnet/tools" \
-        && dotnet try jupyter install \
+        && dotnet interactive jupyter install \
         && date >/build-date.txt \
         && set +o xtrace
 
