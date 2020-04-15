@@ -26,9 +26,10 @@ RUN set -o xtrace \
 	&& $CONDA_DIR/bin/conda update -y python \
 	&& $CONDA_DIR/bin/conda clean -a -y \
 	&& $CONDA_DIR/bin/pip install --no-cache-dir sklearn-pandas isoweek pandas_summary torchtext \
-	&& find . -type f -name "*.py[co]" -delete \
-	&& find . -type f -name "*.js.map" -delete \	
-	&& find . -type d -name "__pycache__" -delete \
+	&& find $CONDA_DIR -type f -name "*.py[co]" -delete \
+	&& find $CONDA_DIR -type f -name "*.js.map" -delete \
+	&& find $CONDA_DIR -path '*/__pycache__/*' -delete \
+	&& find $CONDA_DIR -type d -name "__pycache__" -delete \
 	&& date >/build-date.txt \
 	&& set +o xtrace
 	
