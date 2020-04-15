@@ -22,7 +22,7 @@ RUN set -o xtrace \
 		ipywidgets \
 		tensorflow-mkl">=2.0.0" \	
 	&& $CONDA_DIR/bin/conda install -q -y pytorch torchvision cpuonly -c pytorch \
-	&& $CONDA_DIR/bin/conda install -q -y feather-format opencv scipy matplotlib scikit-image spacy -c conda-forge \
+	&& $CONDA_DIR/bin/conda install -q -y jupyterlab feather-format opencv scipy matplotlib scikit-image spacy -c conda-forge \
 	&& $CONDA_DIR/bin/conda update -y python \
 	&& $CONDA_DIR/bin/conda clean -a -y \
 	&& $CONDA_DIR/bin/pip install --no-cache-dir sklearn-pandas isoweek pandas_summary torchtext \
@@ -48,4 +48,4 @@ RUN $CONDA_DIR/bin/python /work/tx.py
 FROM build
 WORKDIR /work
 EXPOSE 8888
-ENTRYPOINT ["/condinst/bin/jupyter", "notebook", "--ip=0.0.0.0", "--allow-root", "--no-browser", "--NotebookApp.allow_origin='*'", "--NotebookApp.token=''"]
+ENTRYPOINT ["/condinst/bin/jupyter", "lab", "--ip=0.0.0.0", "--allow-root", "--no-browser", "--NotebookApp.allow_origin='*'", "--NotebookApp.token=''"]
