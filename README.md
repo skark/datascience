@@ -1,5 +1,5 @@
 # About This Image
-This image hosts a juypter notebook server for *single users* to run workloads on a *cpu*. This image doesn't support *gpus*. The image is automatically updated with the latest python datascience packages.
+This image hosts a juypter notebook server for **single users** to run workloads on a **cpu**. This is ideal for systems without a dedicated gpu. The image is automatically updated with the latest python datascience packages.
 
 # How to use this image
 Sample command to run on linux:  
