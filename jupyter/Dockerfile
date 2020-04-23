@@ -31,8 +31,8 @@ RUN set -o xtrace \
 	&& find $CONDA_DIR -type f -name "*.js.map" -delete \
 	&& find $CONDA_DIR -path '*/__pycache__/*' -delete \
 	&& find $CONDA_DIR -type d -name "__pycache__" -delete \
-	&& for n in {1..20}; do rdfind -checksum sha1 -makehardlinks true -makeresultsfile false /usr /root /condinst; done
-	&& apt remove -y rdfind
+	&& for n in {1..20}; do rdfind -checksum sha1 -makehardlinks true -makeresultsfile false /usr /root /condinst; done \
+	&& apt remove -y rdfind \
 	&& date >/build-date.txt \
 	&& set +o xtrace
 	
