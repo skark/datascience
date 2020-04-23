@@ -15,7 +15,6 @@ RUN set -o xtrace \
 	&& rm Miniconda3-latest-Linux-x86_64.sh
 	
 RUN $CONDA_DIR/bin/conda install -q -y  \
-		notebook \
 		numpy \
 		pandas \
 		scikit-learn \
@@ -25,7 +24,7 @@ RUN $CONDA_DIR/bin/conda install -q -y  \
 		ipywidgets \
 		tensorflow-mkl">=2.0.0" \	
 	&& $CONDA_DIR/bin/conda install -q -y pytorch torchvision torchtext cpuonly -c pytorch \
-	&& $CONDA_DIR/bin/conda install -q -y jupyterlab feather-format opencv scipy matplotlib scikit-image spacy -c conda-forge \
+	&& $CONDA_DIR/bin/conda install -q -y notebook jupyterlab feather-format opencv scipy matplotlib scikit-image spacy -c conda-forge \
 	&& $CONDA_DIR/bin/conda update -y python \
 	&& $CONDA_DIR/bin/conda clean -a -y \
 	&& $CONDA_DIR/bin/pip install --no-cache-dir sklearn-pandas isoweek pandas_summary \
