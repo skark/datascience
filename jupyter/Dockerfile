@@ -12,9 +12,8 @@ RUN set -o xtrace \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& wget -nv https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh \
 	&& /bin/bash Miniconda3-latest-Linux-x86_64.sh -f -b -p $CONDA_DIR \
-	&& rm Miniconda3-latest-Linux-x86_64.sh
-	
-RUN $CONDA_DIR/bin/conda install -q -y  \
+	&& rm Miniconda3-latest-Linux-x86_64.sh \
+	&& $CONDA_DIR/bin/conda install -q -y  \
 		numpy \
 		pandas \
 		scikit-learn \
