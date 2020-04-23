@@ -2,16 +2,19 @@ FROM ubuntu:latest as build
 
 ENV CONDA_DIR=/condinst
 
+COPY startup/*.py /root/.ipython/profile_default/startup/
+
 RUN set -o xtrace \ 
 	&& apt-get update \
-	&& apt-get -y dist-upgrade \
+	&& apt-get -y full-upgrade \
 	&& DEBIAN_FRONTEND=noninteractive apt-get install -y git wget keychain libsm6 libxext6 libxrender1 dvipng texlive-latex-extra texlive-fonts-recommended \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& wget -nv https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh \
 	&& /bin/bash Miniconda3-latest-Linux-x86_64.sh -f -b -p $CONDA_DIR \
-	&& rm Miniconda3-latest-Linux-x86_64.sh \
-	&& $CONDA_DIR/bin/conda install -q -y  \
+	&& rm Miniconda3-latest-Linux-x86_64.sh
+	
+RUN $CONDA_DIR/bin/conda install -q -y  \
 		notebook \
 		numpy \
 		pandas \
@@ -21,11 +24,11 @@ RUN set -o xtrace \
 		bcolz \
 		ipywidgets \
 		tensorflow-mkl">=2.0.0" \	
-	&& $CONDA_DIR/bin/conda install -q -y pytorch torchvision cpuonly -c pytorch \
+	&& $CONDA_DIR/bin/conda install -q -y pytorch torchvision torchtext cpuonly -c pytorch \
 	&& $CONDA_DIR/bin/conda install -q -y jupyterlab feather-format opencv scipy matplotlib scikit-image spacy -c conda-forge \
 	&& $CONDA_DIR/bin/conda update -y python \
 	&& $CONDA_DIR/bin/conda clean -a -y \
-	&& $CONDA_DIR/bin/pip install --no-cache-dir sklearn-pandas isoweek pandas_summary torchtext \
+	&& $CONDA_DIR/bin/pip install --no-cache-dir sklearn-pandas isoweek pandas_summary \
 	&& find $CONDA_DIR -type f -name "*.py[co]" -delete \
 	&& find $CONDA_DIR -type f -name "*.js.map" -delete \
 	&& find $CONDA_DIR -path '*/__pycache__/*' -delete \
@@ -34,9 +37,7 @@ RUN set -o xtrace \
 	&& set +o xtrace
 	
 #		opencv \	
-#	&& $CONDA_DIR/bin/conda update --all -y  \	
-
-COPY startup/*.py /root/.ipython/profile_default/startup/
+#	&& $CONDA_DIR/bin/conda update --all -y  \
 
 #FROM scratch as final
 #COPY --from=build / /
