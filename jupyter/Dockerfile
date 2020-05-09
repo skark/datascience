@@ -45,6 +45,8 @@ RUN set -o xtrace \
 FROM build
 COPY unittest.py /work/tx.py
 RUN $CONDA_DIR/bin/python /work/tx.py
+RUN $CONDA_DIR/bin/conda env export --file environment.yml
+RUN cat environment.yml
 
 FROM build
 WORKDIR /work
