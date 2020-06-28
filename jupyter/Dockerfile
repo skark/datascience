@@ -1,6 +1,7 @@
 FROM ubuntu:latest as build
 
 ENV CONDA_DIR=/condinst
+ENV PATH=$PATH:$CONDA_DIR/bin
 
 COPY startup/*.py /root/.ipython/profile_default/startup/
 
@@ -21,9 +22,10 @@ RUN set -o xtrace \
 		sympy \
 		bcolz \
 		ipywidgets \
-		tensorflow-mkl">=2.0.0" \	
+		tensorflow-mkl">=2.2.0" \	
 	&& $CONDA_DIR/bin/conda install -q -y pytorch torchvision torchtext cpuonly -c pytorch \
-	&& $CONDA_DIR/bin/conda install -q -y notebook jupyterlab feather-format opencv scipy matplotlib scikit-image spacy statsmodels -c conda-forge \
+	&& $CONDA_DIR/bin/conda install -q -y notebook jupyterlab feather-format opencv scipy matplotlib scikit-image spacy statsmodels nodejs">=10.0.0" ipywidgets -c conda-forge \
+	&& $CONDA_DIR/bin/jupyter labextension install @jupyter-widgets/jupyterlab-manager
 	&& $CONDA_DIR/bin/conda update -y python \
 	&& $CONDA_DIR/bin/conda clean -a -y \
 	&& $CONDA_DIR/bin/pip install --no-cache-dir sklearn-pandas isoweek pandas_summary \
