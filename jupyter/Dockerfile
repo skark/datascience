@@ -24,7 +24,7 @@ RUN set -o xtrace \
 		ipywidgets \
 		tensorflow-mkl">=2.2.0" \	
 	&& $CONDA_DIR/bin/conda install -q -y pytorch torchvision torchtext cpuonly -c pytorch \
-	&& $CONDA_DIR/bin/conda install -q -y notebook jupyterlab feather-format opencv scipy matplotlib scikit-image spacy statsmodels nodejs">=12.4.0" ipywidgets ipympl">=0.5.6" -c conda-forge \
+	&& $CONDA_DIR/bin/conda install -q -y notebook jupyterlab feather-format opencv scipy matplotlib scikit-image spacy statsmodels nodejs">=12.4.0" ipympl">=0.5.6" -c conda-forge \
 	&& $CONDA_DIR/bin/jupyter labextension install @jupyter-widgets/jupyterlab-manager jupyter-matplotlib \
 	&& $CONDA_DIR/bin/conda update -y python \
 	&& $CONDA_DIR/bin/conda clean -a -y \
