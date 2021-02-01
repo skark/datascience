@@ -7,7 +7,7 @@ ENV CONDA_DIR=/condinst \
 RUN set -o xtrace \
         && apt-get update \
         && apt-get -y dist-upgrade \
-        && DEBIAN_FRONTEND=noninteractive apt-get install -y wget rdfind \
+        && DEBIAN_FRONTEND=noninteractive apt-get install -y wget \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/* \
         && wget -nv https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh \
@@ -20,11 +20,9 @@ RUN set -o xtrace \
         && find $CONDA_DIR -type f -name "*.js.map" -delete \
         && find $CONDA_DIR -path '*/__pycache__/*' -delete \
         && find $CONDA_DIR -type d -name "__pycache__" -delete \
-        && dotnet tool install -g --add-source "https://dotnet.myget.org/F/dotnet-try/api/v3/index.json" Microsoft.dotnet-interactive \
+        && dotnet tool install -g --add-source "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json" Microsoft.dotnet-interactive \
         && export PATH="$PATH:$CONDA_DIR/bin:/root/.dotnet/tools" \
         && dotnet interactive jupyter install \
-        && for n in {1..20}; do rdfind -checksum sha1 -makehardlinks true -makeresultsfile false /usr /root $CONDA_DIR; done \
-        && apt remove -y rdfind \
         && date >/build-date.txt \
         && set +o xtrace
 
