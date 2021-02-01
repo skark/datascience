@@ -24,8 +24,6 @@ RUN set -o xtrace \
 		ipywidgets \
 		tensorflow-mkl">=2.2.0" \	
 	&& $CONDA_DIR/bin/conda install -q -y pytorch torchvision torchtext cpuonly -c pytorch \
-	&& $CONDA_DIR/bin/conda install -q -y notebook -c conda-forge \
-	&& $CONDA_DIR/bin/conda install -q -y jupyterlab -c conda-forge \
 	&& $CONDA_DIR/bin/conda install -q -y feather-format -c conda-forge \
 	&& $CONDA_DIR/bin/conda install -q -y opencv -c conda-forge \
 	&& $CONDA_DIR/bin/conda install -q -y scipy -c conda-forge \
@@ -34,7 +32,9 @@ RUN set -o xtrace \
 	&& $CONDA_DIR/bin/conda install -q -y spacy -c conda-forge \
 	&& $CONDA_DIR/bin/conda install -q -y statsmodels -c conda-forge \
 	&& $CONDA_DIR/bin/conda install -q -y nodejs">=12.4.0" -c conda-forge \
-	&& $CONDA_DIR/bin/conda install -q -y ipympl">=0.5.6" -c conda-forge \	
+	&& $CONDA_DIR/bin/conda install -q -y ipympl">=0.5.6" -c conda-forge \
+	&& $CONDA_DIR/bin/conda install -q -y jupyterlab -c conda-forge \	
+	&& $CONDA_DIR/bin/conda install -q -y notebook -c conda-forge \	
 	&& $CONDA_DIR/bin/jupyter labextension install @jupyter-widgets/jupyterlab-manager jupyter-matplotlib \
 	&& $CONDA_DIR/bin/conda update -y python \
 	&& $CONDA_DIR/bin/conda clean -a -y \
