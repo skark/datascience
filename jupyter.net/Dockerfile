@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:latest as build
+FROM mcr.microsoft.com/dotnet/sdk:latest as build
 
 ENV CONDA_DIR=/condinst \
         DOTNET_CLI_TELEMETRY_OPTOUT=true \
