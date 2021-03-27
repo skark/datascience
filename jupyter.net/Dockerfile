@@ -5,7 +5,7 @@ ENV CONDA_DIR=/condinst \
         PATH="$PATH:$CONDA_DIR/bin:/root/.dotnet/tools"
 
 RUN set -o xtrace \
-        && dotnet --info
+        && dotnet --info \
         && apt-get update \
         && apt-get -y dist-upgrade \
         && DEBIAN_FRONTEND=noninteractive apt-get install -y wget \
