@@ -25,7 +25,6 @@ RUN set -o xtrace \
 		tensorflow-mkl">=2.2.0" \	
 	&& $CONDA_DIR/bin/conda install -q -y pytorch torchvision torchtext cpuonly -c pytorch \
 	&& $CONDA_DIR/bin/conda install -q -y feather-format -c conda-forge \
-	&& $CONDA_DIR/bin/conda install -q -y opencv -c conda-forge \
 	&& $CONDA_DIR/bin/conda install -q -y scipy -c conda-forge \
 	&& $CONDA_DIR/bin/conda install -q -y matplotlib -c conda-forge \
 	&& $CONDA_DIR/bin/conda install -q -y scikit-image -c conda-forge \
@@ -51,6 +50,7 @@ RUN set -o xtrace \
 #	&& apt remove -y rdfind \	
 #		opencv \	
 #	&& $CONDA_DIR/bin/conda update --all -y  \
+#	&& $CONDA_DIR/bin/conda install -q -y opencv -c conda-forge \
 
 #FROM scratch as final
 #COPY --from=build / /
