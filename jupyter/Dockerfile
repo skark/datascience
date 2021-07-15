@@ -1,4 +1,4 @@
-FROM ubuntu:latest as build
+FROM ubuntu:rolling as build
 
 ENV CONDA_DIR=/condinst
 ENV PATH=$PATH:$CONDA_DIR/bin
