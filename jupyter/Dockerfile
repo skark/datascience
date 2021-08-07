@@ -20,7 +20,6 @@ RUN set -o xtrace \
 		scikit-learn \
 		seaborn \
 		sympy \
-		bcolz \
 		ipywidgets \
 		tensorflow-mkl">=2.2.0" \	
 	&& $CONDA_DIR/bin/conda install -q -y pytorch torchvision torchtext cpuonly -c pytorch \
@@ -48,7 +47,8 @@ RUN set -o xtrace \
 # apt-get install -y rdfind 
 #	&& for n in {1..20}; do rdfind -checksum sha1 -makehardlinks true -makeresultsfile false /usr /root $CONDA_DIR; done \
 #	&& apt remove -y rdfind \	
-#		opencv \	
+#		opencv \
+#		bcolz \
 #	&& $CONDA_DIR/bin/conda update --all -y  \
 #	&& $CONDA_DIR/bin/conda install -q -y opencv -c conda-forge \
 
