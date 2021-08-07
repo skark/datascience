@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+        
+  schedule:
+    - cron:  '17 5 * * 6'        
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Docker Login Build Push
+        run: |
+          cd jupyter
+          docker run --privileged --rm -v "$(pwd)":"$(pwd)" -w "$(pwd)" -d --name dind docker:dind && docker logs -f dind 2>&1 | fgrep -m1 'API listen on /var/run/docker.sock'
+          docker exec dind docker version
+          docker exec dind docker build -t skark/datascience:latest -f ./Dockerfile .
+          docker exec dind docker save 'skark/datascience:latest' | docker load
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker push skark/datascience:latest
+          cd ../jupyter.net
