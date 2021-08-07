@@ -16,11 +16,20 @@ jobs:
         
       - name: Docker Login Build Push
         run: |
+          set -o xtrace
           cd jupyter
           docker run --privileged --rm -v "$(pwd)":"$(pwd)" -w "$(pwd)" -d --name dind docker:dind && docker logs -f dind 2>&1 | fgrep -m1 'API listen on /var/run/docker.sock'
           docker exec dind docker version
           docker exec dind docker build -t skark/datascience:latest -f ./Dockerfile .
           docker exec dind docker save 'skark/datascience:latest' | docker load
-          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker push skark/datascience:latest
+          docker stop dind
           cd ../jupyter.net
+          docker run --privileged --rm -v "$(pwd)":"$(pwd)" -w "$(pwd)" -d --name dind docker:dind && docker logs -f dind 2>&1 | fgrep -m1 'API listen on /var/run/docker.sock'
+          docker exec dind docker build -t skark/datascience:net -f ./Dockerfile .
+          docker exec dind docker save 'skark/datascience:net' | docker load
+          docker images
+          set +o xtrace
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          set -o xtrace
+          docker push skark/datascience:latest
+          docker push skark/datascience:net
