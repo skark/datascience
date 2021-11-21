@@ -2,6 +2,9 @@ FROM mcr.microsoft.com/dotnet/sdk:latest as build
 
 ENV CONDA_DIR=/condinst \
         DOTNET_CLI_TELEMETRY_OPTOUT=true \
+        DOTNET_TieredPGO=1 \
+        DOTNET_TC_QuickJitForLoops=1 \
+        DOTNET_ReadyToRun=0 \
         PATH="$PATH:$CONDA_DIR/bin:/root/.dotnet/tools"
 
 RUN set -o xtrace \
